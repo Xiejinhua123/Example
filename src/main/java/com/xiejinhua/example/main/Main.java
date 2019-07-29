@@ -33,17 +33,7 @@ public class Main {
 	static List<Future> futures = new LinkedList<Future>();
 
 	public static void main(String[] args) {
-		
-		List<String> mlist = new ArrayList<>();
-	    mlist.add("zhu");
-	    mlist.add("wen");
-	    mlist.add("tao");
-	    String[] array = mlist.toArray(new String[0]);
-	    // 输出数组
-	    for (int i = 0; i < array.length; i++) {
-	        System.out.println("array--> " + array[i]);
-	    }
-		
+		portTest();
 	}
 
 	static void testBc() {
@@ -173,9 +163,9 @@ public class Main {
 				pool.submit(new Runnable() {
 					@Override
 					public void run() {
-						String str = HttpClientUtil.httpGet("http://10.254.26.102:" + ii, 300);
+						String str = HttpClientUtil.httpGet("http://192.168.1.3:" + ii, 300);
 						if (str != null) {
-							Util.write(ii + "");
+							Util.write(ii + " \t " + str);
 						}
 					}
 				});

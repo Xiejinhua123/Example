@@ -1,11 +1,11 @@
 package com.xiejinhua.example.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.elasticsearch.annotations.Mapping;
 
-@Mapping
+@Mapper
 public interface DoubleMapper {
 
 	@Insert("INSERT INTO `double` VALUES (${b1},${b2},${b3},${b4},${b5},${b6},${r})")

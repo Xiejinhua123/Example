@@ -8,14 +8,6 @@ import java.lang.reflect.Proxy;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-/**
- * 
- * rpc
- * 
- * @author ½â½ð»¯
- *
- * @param <S>
- */
 public class RpcImporter<S> {
 
 	@SuppressWarnings("unchecked")
