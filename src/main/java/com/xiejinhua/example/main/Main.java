@@ -1,12 +1,9 @@
 package com.xiejinhua.example.main;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import com.xiejinhua.example.entity.MyHashMap;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +13,6 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.alibaba.fastjson.JSON;
 import com.xiejinhua.example.test.Test;
 import com.xiejinhua.example.util.HttpClientUtil;
 import com.xiejinhua.example.util.Util;
@@ -33,7 +29,22 @@ public class Main {
 	static List<Future> futures = new LinkedList<Future>();
 
 	public static void main(String[] args) {
-		portTest();
+		String[] ips = {"10.67.51.19", "10.67.51.17", "10.67.51.51", "10.67.51.56", "10.67.51.53", "10.67.51.55", "10.67.51.57", "10.67.51.58", "10.67.51.67", "10.67.51.65", "10.67.51.70", "10.67.51.69", "10.67.51.73", "10.67.51.74", "10.67.51.91", "10.67.51.94", "10.67.51.107", "10.67.51.83", "10.67.51.106", "10.67.51.99", "10.67.51.117", "10.67.51.114", "10.67.51.118", "10.67.51.135", "10.67.51.148", "10.67.51.149", "10.67.51.151", "10.67.51.173", "10.67.51.177", "10.67.51.184", "10.67.51.172", "10.67.51.189", "10.67.51.208", "10.67.51.202", "10.67.51.200", "10.67.51.214", "10.67.51.201", "10.67.51.254", "10.67.51.255", "10.67.51.2", "10.67.51.1", "10.67.51.3"};
+		for( final String ip : ips ) {
+			pool.submit(() -> {
+				try {
+					int size = 65535;
+					for (int i = 0; i < size; i++) {
+						String str = HttpClientUtil.httpGet(ip + ":" + i, 300);
+						if (str != null) {
+							Util.write(i + " \t " + str);
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
 	}
 
 	static void testBc() {
@@ -58,7 +69,6 @@ public class Main {
 								for (int r = 1; r <= red; r++) {
 									LinkedList<Integer> result1 = new LinkedList<>(result);
 									result1.add(r);
-//									System.out.println(result1.toString());
 									results.add(result1);
 								}
 							}
@@ -66,35 +76,16 @@ public class Main {
 		
 	}
 	
-	static void testIP() {
+	static void testIP( String ip ) {
 		try {
-			 System.out.println( InetAddress.getLocalHost() );
-			boolean status = InetAddress.getByName("192.168.52.118").isReachable(800);
-			System.out.println(status);
+//			 System.out.println( InetAddress.getLocalHost() );
+			boolean status = InetAddress.getByName(ip).isReachable(500);
+			System.out.println( ip + "\t" + status);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	static void testHashMap() {
-		
-		MyHashMap<String, String> map = new MyHashMap<String , String>();
-		map.put("1", "a");
-		map.put("2", "a");
-		map.put("3", "a");
-		map.put("4", "a");
-		map.put("5", "a");
-		map.put("6", "a");
-		map.put("7", "a");
-		map.put("8", "a");
-		map.put("9", "a");
-		map.put("10", "a");
-		map.put("11", "a");
-		map.put("12", "a");
-		map.put("13", "a");
-		
-	}
-	
 	static void testThreadPool() {
 		ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,60L, TimeUnit.SECONDS,new SynchronousQueue<Runnable>());
 		pool.submit(()->{

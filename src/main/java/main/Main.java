@@ -8,29 +8,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.alibaba.excel.util.StringUtils;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-//import com.dingtalk.api.DefaultDingTalkClient;
-//import com.dingtalk.api.DingTalkClient;
-//import com.dingtalk.api.request.OapiRobotSendRequest;
-//import com.dingtalk.api.request.OapiUserGetRequest;
-//import com.dingtalk.api.response.OapiRobotSendResponse;
-//import com.dingtalk.api.response.OapiUserGetResponse;
-import com.ql.util.express.DefaultContext;
-import com.ql.util.express.ExpressRunner;
-//import com.taobao.api.ApiException;
 import com.xiejinhua.example.util.HttpClientUtil;
 
 public class Main {
 	private static List<JSONObject> jsons = new ArrayList<>();
-	private static HashMap<String, Integer> map = new HashMap<String, Integer>();
 
 	public static void main(String[] args) throws Exception {
 		testHttpDingDing();
@@ -88,7 +73,7 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 		for (Object object : array) {
 			JSONObject json = JSONObject.parseObject(object.toString());
-			String key = json.getString("companyCode") + " - " + json.getString("subjectCode");
+//			String key = json.getString("companyCode") + " - " + json.getString("subjectCode");
 			// if ( map.containsKey(key) ) {
 			// map.put(key, map.get(key)+1);
 			// }else {

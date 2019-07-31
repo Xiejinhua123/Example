@@ -1,15 +1,10 @@
 package com.xiejinhua.example.controller;
 
-import java.net.URL;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.Async;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -17,11 +12,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
-import org.springframework.data.redis.connection.RedisSentinelConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.annotation.AsyncConfigurationSelector;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +39,6 @@ public class TestController {
 	
 	@Autowired
 	private DoubleQiuFeignService doubleQiuFeignService;
-
-	// @Autowired private RedisSentinelConfiguration redisSentinelConfiguration;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -153,8 +142,6 @@ public class TestController {
 	@ApiOperation("测试feign")
 	@GetMapping("/testFeign")
 	public String testFeign() {
-		
-//		this.restTemplate.get
 		
 		String result = "";
 		try {
