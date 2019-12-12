@@ -13,6 +13,10 @@ import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.xiejinhua.example.server.UserServer;
-import com.xiejinhua.example.server.feign.DoubleQiuFeignService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -37,9 +40,6 @@ public class TestController {
 	@Autowired
 	private StringRedisTemplate redisTemplate;
 	
-	@Autowired
-	private DoubleQiuFeignService doubleQiuFeignService;
-
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -143,13 +143,18 @@ public class TestController {
 	@GetMapping("/testFeign")
 	public String testFeign() {
 		
-		String result = "";
+		ResponseEntity<String> result = null;
 		try {
-			result = this.doubleQiuFeignService.getResult();
+			String url = "http://www.baidu.com";
+
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("User-Agent", "curl/7.58.0");
+	        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+			result = this.restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(result);
-		return result;
+		return result.getBody();
 	}
 }
