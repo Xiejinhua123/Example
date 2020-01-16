@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,34 +23,25 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiejinhua.example.entity.LotteryData;
 import com.xiejinhua.example.util.HttpClientUtil;
 
+import design_pattern.SingletonClass;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
 public class Main {
 	private static List<JSONObject> jsons = new ArrayList<>();
 
 	private static native void registerNatives();
 
 	public static void main(String[] args) throws Exception {
-		
-
-		File file = new File("D:\\a.txt");
-		// String str = JSON.toJSONString(map);
-
-		FileWriter fileWriter = new FileWriter(file);
-		BufferedWriter bw = new BufferedWriter(fileWriter);
-for (int i = 445; i < 50000; i++) {
-	String str = HttpClientUtil.httpGet("http://10.0.56.207:" + i);
-	if (str != null)
-		bw.write(i + "----" + str);
-		}
-		bw.close();
-		fileWriter.close();
-	
-		
-		System.out.println(  );
-		
-//		testHttpDingDing();
-//		ClassLoader
+		int ARRAY_MASK = 02144;
+		System.out.println(ARRAY_MASK);
 	}
-	
+
+	public static FileWriter getFileWriter() throws Exception {
+		return new FileWriter(new File("D:\\a.txt"));
+	}
+
 	public static void test2() throws IOException, InterruptedException {
 		File file = new File("D:\\a.txt");
 		String line = null;
@@ -62,7 +55,7 @@ for (int i = 445; i < 50000; i++) {
 		fileReader.close();
 		br.close();
 	}
-	
+
 	public static void test3() throws IOException, InterruptedException {
 		File file = new File("D:\\b.txt");
 		String line = null;
@@ -76,7 +69,7 @@ for (int i = 445; i < 50000; i++) {
 		fileReader.close();
 		br.close();
 	}
-	
+
 	public static void test4() throws IOException, InterruptedException {
 		File file = new File("D:\\c.txt");
 		String line = null;

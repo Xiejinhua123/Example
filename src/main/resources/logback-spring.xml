@@ -18,6 +18,11 @@
 			<appender-ref ref="STDOUT" />
 		</root>
 	</springProfile>
+	<springProfile name="yonghui">
+		<root level="debug">
+			<appender-ref ref="STDOUT" />
+		</root>
+	</springProfile>
 
 	<springProfile name="uat">
 		<root level="info">
