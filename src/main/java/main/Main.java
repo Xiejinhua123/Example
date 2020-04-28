@@ -34,8 +34,7 @@ public class Main {
 	private static native void registerNatives();
 
 	public static void main(String[] args) throws Exception {
-		int ARRAY_MASK = 02144;
-		System.out.println(ARRAY_MASK);
+		testHttpDingDing();
 	}
 
 	public static FileWriter getFileWriter() throws Exception {
@@ -143,8 +142,9 @@ public class Main {
 
 	public static void testHttpDingDing() {
 		// 文档地址 https://open-doc.dingtalk.com/microapp/serverapi2/qf2nxq
-		String url = "https://oapi.dingtalk.com/robot/send?access_token=48d56384fe3578aece678a54180fb5a05197fefa61534ece4f154da120bc94e3";
-		String res = HttpClientUtil.httpJSONPost(url, "{\"msgtype\":\"text\", \"text\":{\"content\":\"测试消息\n测试数据\"}}");
+		// https://oapi.dingtalk.com/robot/send?access_token=f0c7ff1b1dd3462ca22e7a50
+		String url = "https://oapi.dingtalk.com/robot/send?access_token=0cb8c8015a26c0fd2976dc0041c32a36263d0d88";
+		String res = HttpClientUtil.httpJSONPost(url, "{\"msgtype\":\"text\", \"text\":{\"content\":\"aaa测试消息\n测试数据\"}}");
 		System.out.println(res);
 	}
 
